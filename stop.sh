@@ -3,7 +3,7 @@ cd "$(dirname "$0")"
 echo "Stop containers"
 docker-compose stop
 
-read -p "Do you want to remove the config & database? [y/n]" -n 1 -r
+read -p "Do you want to remove the config & database? " -n 1 -r
 echo    # (optional) move to a new line
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 then

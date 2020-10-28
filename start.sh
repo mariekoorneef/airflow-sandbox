@@ -5,7 +5,7 @@ if [ -z "$airflowExists" ]; then
     docker-compose up --remove-orphans --build --force-recreate --no-start
 fi
 
-printf "Start docker containers"
+echo "Start docker containers"
 docker-compose start
 
 echo "Wait for the webserver"
@@ -14,4 +14,4 @@ until $(curl --output /dev/null --silent --head --fail http://localhost:8080); d
     sleep 5
 done
 
-printf "\nYou can visit localhost:8080"
+echo "You can visit localhost:8080"

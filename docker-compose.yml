@@ -3,7 +3,10 @@ x-airflow-environment: &airflow-environment
   AIRFLOW__CORE__EXECUTOR: LocalExecutor
   AIRFLOW__CORE__LOAD_EXAMPLES: "False"
   AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
-  AIRFLOW__CORE__FERNET_KEY: 9o6DgC4QZPswUlFRsE6RSq9KTwIilZUSUHtDaVKFqsY=
+  SQLALCHEMY_DATABASE_URI: postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+  AIRFLOW_CONN_METADATA_DB: postgres+psycopg2://airflow:airflow@postgres:5432/airflow
+  AIRFLOW_VAR__METADATA_DB_SCHEMA: airflow
+  AIRFLOW__CORE__FERNET_KEY: FB0o_zt4e3Ziq3LdUUO7F2Z95cvFFx16hU8jTeR1ASM=
   AIRFLOW__WEBSERVER__DAG_DEFAULT_VIEW: graph
   AIRFLOW__WEBSERVER__DEFAULT_UI_TIMEZONE: CET
 
@@ -17,6 +20,19 @@ services:
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - my-airflow-database:/var/lib/postgresql/data/pgdata
+  init:
+    build: .
+    environment:
+      <<: *airflow-environment
+    depends_on:
+      - postgres
+    volumes:
+      - ./scripts:/scripts
+      - ./variables/variables.json:/opt/airflow/variables.json
+      - my-airflow-logs:/opt/airflow/logs
+    entrypoint: /bin/bash
+    command: -c "bash /scripts/init.sh"
+    restart: "no"
   webserver:
     build: .
     ports:
@@ -24,16 +40,12 @@ services:
     environment:
       <<: *airflow-environment
     depends_on:
-      - postgres
+      - init
     volumes:
       - ./dags:/opt/airflow/dags
-      - ./variables/variables.json:/opt/airflow/variables.json
       - my-airflow-logs:/opt/airflow/logs
     entrypoint: /bin/bash
-    command: >
-      -c "airflow upgradedb
-      && airflow variables -i /opt/airflow/variables.json
-      && airflow webserver"
+    command: -c "airflow webserver"
     restart: always
   scheduler:
     build: .
