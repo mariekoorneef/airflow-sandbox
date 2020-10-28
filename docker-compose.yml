@@ -8,6 +8,7 @@ x-airflow-environment: &airflow-environment
   AIRFLOW_VAR__METADATA_DB_SCHEMA: airflow
   AIRFLOW__CORE__FERNET_KEY: FB0o_zt4e3Ziq3LdUUO7F2Z95cvFFx16hU8jTeR1ASM=
   AIRFLOW__WEBSERVER__DAG_DEFAULT_VIEW: graph
+  AIRFLOW__WEBSERVER__DEFAULT_UI_TIMEZONE: CET
 
 services:
   postgres:
