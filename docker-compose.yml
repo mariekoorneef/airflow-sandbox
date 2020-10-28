@@ -31,8 +31,7 @@ services:
       - ./variables/variables.json:/opt/airflow/variables.json
       - my-airflow-logs:/opt/airflow/logs
     entrypoint: /bin/bash
-    command: >
-      -c "bash /scripts/init.sh"
+    command: -c "bash /scripts/init.sh"
     restart: "no"
   webserver:
     build: .
