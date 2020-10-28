@@ -1,6 +1,6 @@
 #!/bin/bash
 
-airflowExists=$( docker ps -aq -f name=data-airflow-dags_init_1 )
+airflowExists=$( docker ps -aq -f name=airflow-sandbox_init_1 )
 if [ -z "$airflowExists" ]; then
     docker-compose up --remove-orphans --build --force-recreate --no-start
 fi
