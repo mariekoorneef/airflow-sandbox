@@ -16,5 +16,5 @@ and [Airflow Executor](https://airflow.apache.org/docs/stable/executor/index.htm
 
 #### References
 - [puckel/docker-airflow](https://github.com/puckel/docker-airflow)
-- [godatadriven/airflow](https://github.com/godatadriven/airflow)
+- [godatadriven-dockerhub/airflow](https://github.com/godatadriven-dockerhub/airflow)
 - [Airflow Configuration References](https://airflow.apache.org/docs/stable/configurations-ref.html)
