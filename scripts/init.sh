@@ -1,6 +1,6 @@
 #!/bin/bash
 cd "$(dirname "$0")"
-airflow initdb
+airflow db init
 
-airflow variables -i /opt/airflow/variables.json
-airflow create_user --role Admin --username airflow --password airflow -e airflow@airflow.com -f airflow -l airflow
+airflow variables import /opt/airflow/variables.json
+airflow users create --username airflow --firstname air --lastname flow --password airflow --role Admin --email admin@example.org
