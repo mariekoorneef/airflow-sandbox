@@ -1,5 +1,5 @@
 # airflow-sandbox
-apache/airflow:2.1.0
+Image `apache/airflow:2.1.0`
 and [Airflow Executor](https://airflow.apache.org/docs/stable/executor/index.html) `LocalExecutor`.
 - You can update Airflow version in `Dockerfile`
 - To load Airflow examples set `AIRFLOW__CORE__LOAD_EXAMPLES` to `True`
